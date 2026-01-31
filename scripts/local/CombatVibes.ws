@@ -30,26 +30,26 @@ function cvsVibrate(intensity: int, duration: float) {
         victim = (CNewNPC)damageAction.victim;
 
         if ( victim && victim.GetHealth() <= 0 ) {
-            this.Vibrate(3, 0.5);
+            cvsVibrate(3, 0.5);
         }
 
         else if ( damageAction.IsCountered() ) {
-            this.Vibrate(3, 0.2);
+            cvsVibrate(3, 0.2);
         }
 
         else if ( damageAction.IsParried() ) {
-            this.Vibrate(1, 0.1);
+            cvsVibrate(1, 0.1);
         }
 
         else if ( damageAction.DealsAnyDamage() && attackAction ) {
             if ( damageAction.IsCriticalHit() ) {
-                this.Vibrate(2, 0.4);
+                cvsVibrate(2, 0.4);
             }
             else if ( attackAction.GetSwingType() == ST_Heavy ) {
-                this.Vibrate(2, 0.3);
+                cvsVibrate(2, 0.3);
             }
             else {
-                this.Vibrate(1, 0.2);
+                cvsVibrate(1, 0.2);
             }
         }
     }
@@ -59,7 +59,7 @@ function cvsVibrate(intensity: int, duration: float) {
 
 @wrapMethod(W3BoltProjectile) function OnProcessThrowEvent( animEventName : name ) {
     if ( animEventName == 'ProjectileThrow' ) {
-        this.Vibrate(2, 0.1); 
+        cvsVibrate(2, 0.1); 
     }
 
     return wrappedMethod(animEventName);
