@@ -33,40 +33,24 @@ function cvsVibrate(intensity: int, duration: float) {
         hitType = damageAction.GetHitReactionType();
         
         if ( victim && victim.GetHealth() <= 0 ) {
-            cvsVibrate(3, 0.5);
+            cvsVibrate(3, 0.25);
         }
-
-        //else if ( hitType == EHRT_Reflect ) {
-        //    cvsVibrate(3, 0.2);
-        //}
 
         else if ( damageAction.DealtDamage() && attackAction ) {
             attackName = attackAction.GetAttackName();
 
             if ( damageAction.IsCriticalHit() ) {
-                cvsVibrate(2, 0.4);
+                cvsVibrate(2, 0.3);
             }
 
             else if ( attackName == theGame.params.ATTACK_NAME_HEAVY || attackName == theGame.params.ATTACK_NAME_SUPERHEAVY ) {
-                cvsVibrate(2, 0.3);
+                cvsVibrate(3, 0.4);
             }
             else {
-                cvsVibrate(1, 0.2);
+                cvsVibrate(2, 0.3);
             }
         }
-
-        //else if ( !damageAction.DealtDamage() ) {
-        //    cvsVibrate(1, 0.1);
-        //}
     }
     
     return result;
-}
-
-@wrapMethod(W3BoltProjectile) function OnProcessThrowEvent( animEventName : name ) {
-    if ( animEventName == 'ProjectileThrow' ) {
-        cvsVibrate(2, 0.1); 
-    }
-
-    return wrappedMethod(animEventName);
 }
