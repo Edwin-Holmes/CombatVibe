@@ -79,7 +79,6 @@ function cvsVibrate(intensity: int, duration: float) {
 
     wrappedMethod(deltaTime);
 }
-}
 
 @wrapMethod(W3PlayerWitcher) function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int )
 {
