@@ -56,25 +56,29 @@ function cvsVibrate(intensity: int, duration: float) {
 }
 
 @addField(W3PlayerWitcher) var quenVibeCounter : float;
+@addField(W3PlayerWitcher) var lfmNext : bool;
 
 @wrapMethod(W3PlayerWitcher) function OnPlayerTickTimer( deltaTime : float ) {
-    if ( this.IsCurrentSignChanneled() && this.GetCurrentlyCastSign() == ST_Quen ) {
-        
-        quenVibeCounter += deltaTime;
+    if ( this.IsCurrentSignChanneled() && this.GetCurrentlyCastSign() == ST_Quen ) {        
+        if ( quenVibeCounter > 0 ) {
+            quenVibeCounter -= deltaTime;
+        } 
+        else {
 
-        // Create a 0.4 second cycle
-        if ( quenVibeCounter < 0.4 ) {
-            // Phase 1: Soft LFM "Thrum"
-            theGame.VibrateController(0.01, 0.0, 0.05); 
-        } else if ( quenVibeCounter < 0.8 ) {
-            // Phase 2: Very faint HFM "Shimmer"
-            theGame.VibrateController(0.0, 0.01, 0.04);
-        } else {
-            // Reset cycle
-            quenVibeCounter = 0;
+            if ( lfmNext ) {
+                theGame.VibrateController(0.01, 0.0, 0.05); 
+                quenVibeCounter = 0.2;
+                lfmNext = false;  // Next time, play HFM
+            } 
+            else {
+                theGame.VibrateController(0.0, 0.01, 0.04); 
+                quenVibeCounter = 0.1; 
+                lfmNext = true;   // Next time, play LFM
+            }
         }
     } else {
-        quenVibeCounter = 0; // Reset if we stop casting
+        quenVibeCounter = 0;
+        lfmNext = true; // Reset state
     }
 
     wrappedMethod(deltaTime);
