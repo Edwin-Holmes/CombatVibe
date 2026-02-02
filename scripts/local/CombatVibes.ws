@@ -54,3 +54,25 @@ function cvsVibrate(intensity: int, duration: float) {
     
     return result;
 }
+
+@wrapMethod(W3PlayerWitcher) function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int )
+{
+    var level : int;
+
+    // Check skill level if not forced (S_Magic_s13 = Exploding Shield)
+    if( forceSkillLevel > 0 ) {
+        level = forceSkillLevel;
+    } else {
+        level = GetSkillLevel(S_Magic_s13);
+    }
+
+    if (isAlternate) {                          // Alt Quen burst
+        theGame.VibrateControllerVeryHard(); 
+    } else if (level >= 3) {                    // Exploding Shield Level 3
+        theGame.VibrateControllerHard();
+    } else {                                    // Exploding Shield Level 1-2
+        theGame.VibrateControllerLight();
+    }
+
+    wrappedMethod(isAlternate, signEntity, source, forceSkillLevel);
+}
