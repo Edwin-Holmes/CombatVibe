@@ -66,13 +66,13 @@ function cvsVibrate(intensity: int, duration: float) {
         else {
 
             if ( lfmNext ) {
-                theGame.VibrateController(0.01, 0.0, 0.05); 
-                quenVibeCounter = 0.2;
+                theGame.VibrateController(0.01, 0.0, 0.4); 
+                quenVibeCounter = 0.35;
                 lfmNext = false;  // Next time, play HFM
             } 
             else {
-                theGame.VibrateController(0.0, 0.01, 0.04); 
-                quenVibeCounter = 0.1; 
+                theGame.VibrateController(0.0, 0.02, 0.125); 
+                quenVibeCounter = 1.18; 
                 lfmNext = true;   // Next time, play LFM
             }
         }
