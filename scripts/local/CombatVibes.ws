@@ -55,6 +55,16 @@ function cvsVibrate(intensity: int, duration: float) {
     return result;
 }
 
+@wrapMethod(W3PlayerWitcher) function OnPlayerTickTimer( deltaTime : float ) {
+    if ( this.IsCurrentSignChanneled() ) {
+        if ( this.GetCurrentlyCastSign() == ST_Quen ) {
+            theGame.VibrateController(0.0, 0.01, 0.001); 
+        }
+    }
+
+    return wrappedMethod(deltaTime);
+}
+
 @wrapMethod(W3PlayerWitcher) function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int )
 {
     var level : int;
