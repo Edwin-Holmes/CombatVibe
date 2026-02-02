@@ -63,12 +63,12 @@ function cvsVibrate(intensity: int, duration: float) {
         quenVibeCounter += deltaTime;
 
         // Create a 0.4 second cycle
-        if ( quenVibeCounter < 0.2 ) {
+        if ( quenVibeCounter < 0.4 ) {
             // Phase 1: Soft LFM "Thrum"
-            theGame.VibrateController(0.04, 0.0, 0.1); 
-        } else if ( quenVibeCounter < 0.4 ) {
+            theGame.VibrateController(0.01, 0.0, 0.5); 
+        } else if ( quenVibeCounter < 0.8 ) {
             // Phase 2: Very faint HFM "Shimmer"
-            theGame.VibrateController(0.0, 0.02, 0.1);
+            theGame.VibrateController(0.0, 0.01, 0.45);
         } else {
             // Reset cycle
             quenVibeCounter = 0;
