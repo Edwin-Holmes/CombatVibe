@@ -1,23 +1,3 @@
-function cvsVibrate(intensity: int, duration: float) {
-        switch (intensity) {
-            case 3: 
-                theGame.VibrateControllerVeryHard(duration); 
-                break;
-            case 2: 
-                theGame.VibrateControllerHard(duration); 
-                break;
-            case 1: 
-                theGame.VibrateControllerLight(duration); 
-                break;
-            case 0:
-                theGame.VibrateControllerVeryLight(duration);
-                break;
-            default: 
-                GetWitcherPlayer().DisplayHudMessage("Invalid vibration intensity requested");
-                break;
-        }
-    }
-
 @wrapMethod(CNewNPC) function ReactToBeingHit(damageAction : W3DamageAction, optional buffNotApplied : bool) : bool {
     var result       : bool;
     var attackAction : W3Action_Attack;
@@ -32,22 +12,22 @@ function cvsVibrate(intensity: int, duration: float) {
         victim = (CNewNPC)damageAction.victim;
         hitType = damageAction.GetHitReactionType();
         
-        if ( victim && victim.GetHealth() <= 0 ) {
-            cvsVibrate(3, 0.3);
+        if (victim && victim.GetHealth() <= 0) {
+            theGame.VibrateControllerVeryHard(0.3);
         }
 
-        else if ( damageAction.DealtDamage() && attackAction ) {
+        else if (damageAction.DealtDamage() && attackAction) {
             attackName = attackAction.GetAttackName();
 
             if ( damageAction.IsCriticalHit() ) {
-                cvsVibrate(2, 0.45);
+                theGame.VibrateControllerHard(0.45);
             }
 
-            else if ( attackName == theGame.params.ATTACK_NAME_HEAVY || attackName == theGame.params.ATTACK_NAME_SUPERHEAVY ) {
-                cvsVibrate(3, 0.4);
+            else if (attackName == theGame.params.ATTACK_NAME_HEAVY) {
+                theGame.VibrateControllerVeryHard(0.4);
             }
             else {
-                cvsVibrate(2, 0.3);
+                theGame.VibrateControllerHard(0.3);
             }
         }
     }
@@ -65,7 +45,7 @@ function cvsVibrate(intensity: int, duration: float) {
         } 
         else {
 
-            if ( lfmNext ) {
+            if (lfmNext) {
                 theGame.VibrateController(0.01, 0.0, 0.4); 
                 quenVibeCounter = 0.35;
                 lfmNext = false;  // Next time, play HFM
