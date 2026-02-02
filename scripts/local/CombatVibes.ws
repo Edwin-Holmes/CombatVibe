@@ -33,14 +33,14 @@ function cvsVibrate(intensity: int, duration: float) {
         hitType = damageAction.GetHitReactionType();
         
         if ( victim && victim.GetHealth() <= 0 ) {
-            cvsVibrate(3, 0.25);
+            cvsVibrate(3, 0.3);
         }
 
         else if ( damageAction.DealtDamage() && attackAction ) {
             attackName = attackAction.GetAttackName();
 
             if ( damageAction.IsCriticalHit() ) {
-                cvsVibrate(2, 0.3);
+                cvsVibrate(2, 0.45);
             }
 
             else if ( attackName == theGame.params.ATTACK_NAME_HEAVY || attackName == theGame.params.ATTACK_NAME_SUPERHEAVY ) {
