@@ -46,12 +46,12 @@
         else {
 
             if (lfmNext) {
-                theGame.VibrateController(0.01, 0.0, 0.4); 
+                theGame.VibrateController(0.02, 0.0, 0.4); 
                 quenVibeCounter = 0.35;
                 lfmNext = false;  // Next time, play HFM
             } 
             else {
-                theGame.VibrateController(0.0, 0.02, 0.125); 
+                theGame.VibrateController(0.0, 0.02, 0.15); 
                 quenVibeCounter = 1.18; 
                 lfmNext = true;   // Next time, play LFM
             }
@@ -68,18 +68,17 @@
 {
     var level : int;
 
-    // Check skill level if not forced (S_Magic_s13 = Exploding Shield)
-    if( forceSkillLevel > 0 ) {
+    if( forceSkillLevel > 0 ) {                 //Check skill level if not forced (Exploding Shield)
         level = forceSkillLevel;
     } else {
         level = GetSkillLevel(S_Magic_s13);
     }
 
-    if (isAlternate) {                          // Alt Quen burst
+    if (isAlternate) {                          //Alt Quen burst
         theGame.VibrateControllerVeryHard(); 
-    } else if (level >= 3) {                    // Exploding Shield Level 3
+    } else if (level >= 3) {                    //Exploding Shield Level 3
         theGame.VibrateControllerHard();
-    } else {                                    // Exploding Shield Level 1-2
+    } else {                                    //Exploding Shield Level 1-2
         theGame.VibrateControllerLight();
     }
 
